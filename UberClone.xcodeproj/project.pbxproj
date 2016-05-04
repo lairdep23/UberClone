@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		208075811CD9969C001BB637 /* RiderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208075801CD9969C001BB637 /* RiderVC.swift */; };
+		20D6969A1CDA8D1000BF5EB8 /* DriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D696991CDA8D1000BF5EB8 /* DriverVC.swift */; };
 		20DEF0AC1CD96023007BFA81 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */; };
 		814C3ACA1B69877600E307BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC61B69877600E307BB /* Main.storyboard */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		208075801CD9969C001BB637 /* RiderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderVC.swift; sourceTree = "<group>"; };
+		20D696991CDA8D1000BF5EB8 /* DriverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverVC.swift; sourceTree = "<group>"; };
 		20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		814C3AC71B69877600E307BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		814C3AC81B69877600E307BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				20D696991CDA8D1000BF5EB8 /* DriverVC.swift */,
+				208075801CD9969C001BB637 /* RiderVC.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
 				20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */,
@@ -188,7 +194,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208075811CD9969C001BB637 /* RiderVC.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				20D6969A1CDA8D1000BF5EB8 /* DriverVC.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

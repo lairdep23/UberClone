@@ -79,8 +79,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         }
                     } else {
+                        
+                        if self.`switch`.on == true {
+                            
+                            self.performSegueWithIdentifier("loginDriver", sender: self)
+                            
+                        } else {
                     
-                        print("successful Sign up")
+                            self.performSegueWithIdentifier("loginRider", sender: self)
+                        }
                     }
                     
                 }
@@ -89,12 +96,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 PFUser.logInWithUsernameInBackground(username.text! , password: password.text!) {
                     (user: PFUser?, error: NSError?) -> Void in
-                    if user != nil {
+                    if let user = user {
                         
-                        print("Successful Login")
+                        if user["isDriver"]! as! Bool == true {
+                        
+                                self.performSegueWithIdentifier("loginDriver", sender: self)
+                            
+                            } else {
+                            
+                                self.performSegueWithIdentifier("loginRider", sender: self)
+                        }
+                        
                     } else {
                         
                         if let errorString = error!.userInfo["error"] as? String {
+                            
                             self.displayAlert("Login Failed", message: errorString)
                         }
                     }
@@ -144,6 +160,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if PFUser.currentUser()?.username != nil {
+            
+            if PFUser.currentUser()!["isDriver"]! as! Bool {
+                
+                performSegueWithIdentifier("loginDriver", sender: self)
+            } else {
+        
+                performSegueWithIdentifier("loginRider", sender: self)
+            }
+            
+        }
     }
 }
 
