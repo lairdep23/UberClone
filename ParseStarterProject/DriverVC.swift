@@ -56,9 +56,9 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        var distanceDouble = Double(distances[indexPath.row])
+        let distanceDouble = Double(distances[indexPath.row])
         
-        var roundedDistance = Double(round(distanceDouble * 10)/10)
+        let roundedDistance = Double(round(distanceDouble * 10)/10)
 
         cell.textLabel?.text = "\(usernames[indexPath.row]) - \(roundedDistance) miles away"
 
@@ -66,50 +66,6 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -118,6 +74,15 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
             navigationController?.setNavigationBarHidden(true, animated: false)
             
             PFUser.logOut()
+        } else if segue.identifier == "showViewRequests" {
+            
+            if let destination = segue.destinationViewController as? RequestViewVC {
+                
+                destination.requestLocation = locations[(tableView.indexPathForSelectedRow?.row)!]
+                
+                destination.requestUsername = usernames[tableView.indexPathForSelectedRow!.row]
+            }
+            
         }
     }
     
@@ -128,7 +93,7 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
         self.lat = location.latitude
         self.long = location.longitude
         
-        print("locations = \(location.latitude) \(location.longitude)")
+        //print("locations = \(location.latitude) \(location.longitude)")
         
         
         let query = PFQuery(className: "riderRequest")
@@ -138,7 +103,7 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
             
             if error == nil {
                 
-                print("Successfully retrieved \(objects!.count)")
+                //print("Successfully retrieved \(objects!.count)")
                 
                 if let objects = objects as [PFObject]! {
                     
@@ -147,32 +112,36 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
                     
                     for object in objects {
                         
-                        if let username = object["username"] as? String {
+                        if object["driverResponded"] == nil || object["driverResponded"] as! String == "" {
+                        
+                            if let username = object["username"] as? String {
                             
-                            self.usernames.append(username)
+                                self.usernames.append(username)
+                            }
+                        
+                            if let returnedlocation = object["location"] as? PFGeoPoint {
+                            
+                                let requestLocation = CLLocationCoordinate2DMake(returnedlocation.latitude, returnedlocation.longitude)
+                            
+                                self.locations.append(requestLocation)
+                            
+                                let requestCLLocation = CLLocation(latitude: requestLocation.latitude, longitude: requestLocation.longitude)
+                            
+                                let driverCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                            
+                                let distance = driverCLLocation.distanceFromLocation(requestCLLocation)
+                            
+                                self.distances.append(distance * 0.000621371)
+                            
+                            }
                         }
                         
-                        if let returnedlocation = object["location"] as? PFGeoPoint {
-                            
-                            let requestLocation = CLLocationCoordinate2DMake(returnedlocation.latitude, returnedlocation.longitude)
-                            
-                            self.locations.append(requestLocation)
-                            
-                            let requestCLLocation = CLLocation(latitude: requestLocation.latitude, longitude: requestLocation.longitude)
-                            
-                            let driverCLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-                            
-                            let distance = driverCLLocation.distanceFromLocation(requestCLLocation)
-                            
-                            self.distances.append(distance * 0.000621371)
-                            
-                        }
                     }
                     
                     self.tableView.reloadData()
                     
-                    print(self.locations)
-                    print(self.usernames)
+                   // print(self.locations)
+                    //print(self.usernames)
                 }
                 
             } else {
@@ -180,7 +149,6 @@ class DriverVC: UITableViewController, CLLocationManagerDelegate {
                 print(error)
             }
         })
-
         
     }
 

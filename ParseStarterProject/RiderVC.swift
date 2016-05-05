@@ -100,7 +100,7 @@ class RiderVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
             
             riderRequestActive = false
             
-            var query = PFQuery(className: "riderRequest")
+            let query = PFQuery(className: "riderRequest")
             query.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
             query.findObjectsInBackgroundWithBlock({ (objects, error) in
                 
