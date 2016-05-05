@@ -22,6 +22,14 @@
 	<string>1.12.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>So that the rider can track your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>So your driver can find you</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>
@@ -42,9 +50,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>So that the rider can track your location</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>So your driver can find you</string>
 </dict>
 </plist>

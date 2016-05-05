@@ -54,43 +54,52 @@ class RequestViewVC: UIViewController, CLLocationManagerDelegate {
                     
                     for object in objects {
                         
-                        object["driverResponded"] = PFUser.currentUser()?.username!
-                        
-                            object.saveInBackground()
-                        
-                            let requestCLLocation = CLLocation(latitude: self.requestLocation.latitude, longitude: self.requestLocation.longitude)
-                        
-                            CLGeocoder().reverseGeocodeLocation(requestCLLocation, completionHandler: { (placemarks, error) in
+                        var query = PFQuery(className: "riderRequest")
+                        query.getObjectInBackgroundWithId(object.objectId!, block: { (object: PFObject?, error: NSError?) in
+                            
+                            if error != nil {
+                                print(error)
+                            } else if let object = object {
                                 
-                                if error != nil {
+                                object["driverResponded"] = PFUser.currentUser()?.username!
+                                
+                                object.saveInBackground()
+                                
+                                let requestCLLocation = CLLocation(latitude: self.requestLocation.latitude, longitude: self.requestLocation.longitude)
+                                
+                                CLGeocoder().reverseGeocodeLocation(requestCLLocation, completionHandler: { (placemarks, error) in
                                     
-                                    print("Reverse Geocoder failed" + (error?.localizedDescription)!)
-                                    
-                                } else {
-                                    
-                                    if placemarks?.count > 0 {
-                                        let pm = placemarks![0] as CLPlacemark
+                                    if error != nil {
                                         
-                                        let mkPm = MKPlacemark(placemark: pm)
-                                        
-                                        let mapItem = MKMapItem(placemark: mkPm)
-                                        
-                                        mapItem.name = self.requestUsername
-                                        
-                                        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-                                        
-                                        mapItem.openInMapsWithLaunchOptions(launchOptions)
-                                        
+                                        print("Reverse Geocoder failed" + (error?.localizedDescription)!)
                                         
                                     } else {
-                                        print("Problem with data recieved from geocoder")
+                                        
+                                        if placemarks?.count > 0 {
+                                            let pm = placemarks![0] as CLPlacemark
+                                            
+                                            let mkPm = MKPlacemark(placemark: pm)
+                                            
+                                            let mapItem = MKMapItem(placemark: mkPm)
+                                            
+                                            mapItem.name = self.requestUsername
+                                            
+                                            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                                            
+                                            mapItem.openInMapsWithLaunchOptions(launchOptions)
+                                            
+                                            
+                                        } else {
+                                            print("Problem with data recieved from geocoder")
+                                        }
                                     }
-                                }
+                                    
+                                    
+                                    
+                                })
                                 
-                                
-                                
-                            })
-                        
+                            }
+                        })
                         
                         
                     }

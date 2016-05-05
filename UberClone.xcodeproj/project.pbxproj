@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2003FB2F1CDADC1200980DEC /* RequestViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003FB2E1CDADC1200980DEC /* RequestViewVC.swift */; };
+		2006C7321CDBD75D00FC6292 /* ColorPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2006C7311CDBD75D00FC6292 /* ColorPointAnnotation.swift */; };
 		208075811CD9969C001BB637 /* RiderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208075801CD9969C001BB637 /* RiderVC.swift */; };
 		20D6969A1CDA8D1000BF5EB8 /* DriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D696991CDA8D1000BF5EB8 /* DriverVC.swift */; };
 		20DEF0AC1CD96023007BFA81 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		2003FB2E1CDADC1200980DEC /* RequestViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewVC.swift; sourceTree = "<group>"; };
+		2006C7311CDBD75D00FC6292 /* ColorPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPointAnnotation.swift; sourceTree = "<group>"; };
 		208075801CD9969C001BB637 /* RiderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderVC.swift; sourceTree = "<group>"; };
 		20D696991CDA8D1000BF5EB8 /* DriverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverVC.swift; sourceTree = "<group>"; };
 		20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
 				20DEF0AB1CD96023007BFA81 /* Launch Screen.storyboard */,
+				2006C7311CDBD75D00FC6292 /* ColorPointAnnotation.swift */,
 			);
 			path = ParseStarterProject;
 			sourceTree = "<group>";
@@ -158,6 +161,11 @@
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = Q647QB5339;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -198,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				208075811CD9969C001BB637 /* RiderVC.swift in Sources */,
+				2006C7321CDBD75D00FC6292 /* ColorPointAnnotation.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				20D6969A1CDA8D1000BF5EB8 /* DriverVC.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
